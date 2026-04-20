@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router({ mergeParams:true });
+const {auth} = require('../middleware/authmiddleware');
+const {role} = require("../middleware/roleMiddleware.js");
+const { createComment,getCommentsByTask,updateComment,deleteComment } = require('../controllers/commentController');
+const commentValidation = require('../validations/commentValidation');
+const validate = require('../middleware/validationMiddleware');
+router.post('/',auth,role('admin','manager','employee'),commentValidation,validate,createComment);
+router.get('/',auth,role('admin','manager','employee'),getCommentsByTask);
+router.put('/:commentId',auth,role('admin','manager','employee'),updateComment);
+router.delete('/:commentId',auth,role('admin','manager','employee'),deleteComment);
+module.exports = router;

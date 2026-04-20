@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router({ mergeParams:true });
+const {auth} = require('../middleware/authmiddleware');
+const { createComment,getCommentsByTask,updateComment,deleteComment } = require('../controllers/commentController');
+const commentValidation = require('../validations/commentValidation');
+const validate = require('../middleware/validationMiddleware');
+router.post('/',auth,commentValidation,validate,createComment);
+router.get('/',auth,getCommentsByTask);
+router.put('/:commentId',auth,updateComment);
+router.delete('/:commentId',auth,deleteComment);
+module.exports = router;

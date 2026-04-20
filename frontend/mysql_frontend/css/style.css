@@ -1,0 +1,10 @@
+body{
+    background: #f4f6f9;
+}
+.card{
+    border-radius: 10px;
+}
+#taskList {
+    max-height: 100vh;
+    overflow-y: auto;
+}

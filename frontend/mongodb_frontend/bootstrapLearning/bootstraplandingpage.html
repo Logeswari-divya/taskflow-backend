@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <header class="bg-primary position-relative" style="min-height:450px">
+        <div class="d-flex justify-content-end gap-3 p-3">
+            <a class="text-light text-decoration-none" href="#">Home</a>
+            <a class="text-light text-decoration-none" href="#">About</a>
+            <a class="text-light text-decoration-none" href="#">Services</a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="d-flex">
+                        <div class="mx-auto">
+                            <h1 class="display-4">Bootstrap Landing Page</h1>
+                            <p class="lead">Bootstrap Learning design quickly</p>
+                            <button class="btn btn-dark border border-light">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <img class="w-50 h-50" style="clip-path: polygon(50% 0%,0% 100%,100% 100%);"
+                            src="./laptop_women.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute bottom-0 start-0 w-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+                <path fill="white" fill-opacity="1"
+                    d="M0,160L80,165.3C160,171,320,181,480,208C640,235,800,277,960,288C1120,299,1280,277,1360,266.7L1440,256L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+                </path>
+            </svg>
+        </div>
+    </header>
+    <section class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-4 col-md-2">
+                <div class="card bg-light shadow shadow-md w-100 h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="./gears-6281075_640.png" class="w-50 h-50" alt="" />
+                            <p class="fs-6 fw-bolder mb-0">Responsive Layout</p>
+                            <p class="lh-1 fw-lighter" style="font-size:smaller">Design for al devices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-md-2 ">
+                <div class="card bg-light shadow shadow-md w-100 h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="./gears-6281075_640.png" class="w-50 h-50" alt="" />
+                            <p class="fs-6 fw-bolder mb-0">Clean code</p>
+                            <p class="lh-1 fw-lighter" style="font-size:smaller">Maintanable and scalabel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-md-2">
+                <div class="card bg-light shadow shadow-md w-100 h-100">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="./gears-6281075_640.png" class="w-50 h-50" alt="" />
+                            <p class="fs-6 fw-bolder mb-0">Fast Prototyping</p>
+                            <p class="lh-1 fw-lighter" style="font-size:smaller">Speed and development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="mt-3">
+        <div id="carouselId" class="carousel slide bg-dark " data-bs-ride="carousel">
+            <div class="carousel-inner text-center text-light">
+                <div class="carousel-item active bg-primary " style="height:250px">
+                    <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                        <div>
+                            <h2 class="fw-bold">
+                                Learn Bootstrap
+                            </h2 class="lead mb-0">
+                            <p>Master designing in few minites!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item active bg-primary  " style="height:250px">
+                    <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                        <div>
+                            <h2 class="fw-bold">
+                                Learn Bootstrap 1
+                            </h2 class="lead mb-0">
+                            <p>Master designing in few minites 1!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item active bg-primary " style="height:250px">
+                    <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                        <div>
+                            <h2 class="fw-bold">
+                                Learn Bootstrap 2
+                            </h2 class="lead mb-0">
+                            <p>Master designing in few minites 2!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev"><span
+                    class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span></button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next"><span
+                    class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span></button>
+        </div>
+    </section>
+    <section class="container mt-4">
+        <h1 class="text-center">FAQS</h1>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 accordion">
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#oneDiv">
+                            Why we need bootstrap?
+                        </button>
+                    </div>
+                    <div id="oneDiv" class="accordion-collapse collapse">
+                        <div class="accordion-body bg-primary text-white">
+                            <p>Bootstrap is used to design faster</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#twoDiv">
+                            Do i need js for bootstrap?
+                        </button>
+                    </div>
+                    <div id="twoDiv" class="accordion-collapse collapse">
+                        <div class="accordion-body bg-primary text-white">
+                            <p>Bootstrap is used to design faster</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#threeDiv">
+                            Is Bootstrap is mobile Responsive?
+                        </button>
+                    </div>
+                    <div id="threeDiv" class="accordion-collapse collapse">
+                        <div class="accordion-body bg-primary text-white">
+                            <p>Bootstrap is used to design faster</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <button class="accordion-button fw-bold collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#fourDiv">
+                            Can i customize bootstrap components?
+                        </button>
+                    </div>
+                    <div id="fourDiv" class="accordion-collapse collapse">
+                        <div class="accordion-body bg-primary text-white">
+                            <p>Bootstrap is used to design faster</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="container mb-2">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 bg-white p-3">
+                    <h2 class="fw-bold">Contact Form</h2>
+                    <form id="contactForm" action="">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="name" class='form-control' id="name" name="" />
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class='form-control' id="email" />
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="address" class='form-control' col="10" rows="12"></textarea>
+                        </div>
+                        <button class="btn btn-primary my-2" id="submit-btn">Submit</button>
+                        <span id='btnSpinner' class="spinner-border spinner-border-sm text-primary d-none"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="toast-container position-fixed top-0 end-0 ">
+     <div class="toast" id="liveToast" data-bs-autohide="false">
+        <div class="toast-header">
+            <img class="rounded-pill" src="https://picsum.photos/30" />
+            <strong class="me-auto">Success</strong>
+            <button class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+           You Message has been sent
+        </div>
+    </div>
+    </div> 
+    <footer class="bg-dark text-light p-3">
+        <p class="text-center">All Rights reserved</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://github.com/twbs/bootstrap/blob/v5.3.8/site/src/assets/partials/snippets.js"></script>
+    <script>
+        const toastLiveExample = document.getElementById('liveToast')
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submit-btn');
+        const spinner = document.getElementById('btnSpinner');
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            btn.disabled = true;
+            spinner.classList.remove('d-none');
+            setTimeout(() => {
+                btn.disabled = false;
+                spinner.classList.add('d-none');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+                toastBootstrap.show()
+                form.reset();
+            }, 2000);
+        })
+    </script>
+</body>
+
+</html>

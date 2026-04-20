@@ -1,0 +1,85 @@
+In package.json we have 
+dependencies need to install to run the project in production
+devdependencies No need to install in projection to run the app.Only for development like JEST for testing NODEMON for startng server while we change the code.
+peerdepencies-npm install react react-dom
+Suppose if we try to install react npm i react we could not get the react-dom plugin we need to install this seperately.
+While we install this react dom like npm install react-dom react can't be install again it just access this plugin to perform some actions.
+Real world example:While we have phone we need to have charger to phone work charger itself not bring the phone like peer dependency is will works.
+
+
+
+
+CORS -Cross ORIGIN Resource Sharing.
+Browsers follow a rule called Same-Origin Policy.If browser front end runs on port 3000 but server is running on 5000.If browser 
+try to access the port 5000 it gives cors error.Why because browser follow same origin policy.If server included the app.cors() that server tells to the browser we can allow this to access localhost:5000 to fetch the data.
+
+
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+  host:"localhost",
+  user:"root",
+  password:"",
+  database:"testdb"
+});
+
+this created only one connectioon per request.Other request need to wait to this request get finish.
+User 1 request → uses connection
+User 2 request → must wait
+User 3 request → must wait
+
+A pool creates multiple reusable connections.
+const pool = mysql.createPool({
+  connectionLimit:10
+});
+User 1 → connection 1
+User 2 → connection 2
+User 3 → connection 3
+User 4 → connection 4 All request run in parallel.
+
+Without pool:
+API request
+single DB connection
+requests wait in queue
+
+With pool:
+
+API request
+connection pool (10 connections)
+Multiple queries run simultaneously.If 11 request comes means it wait in queue untill others get finish.
+It does not gets failed it will wait.
+
+Why use mysql2/promise
+
+connection.query("SELECT * FROM users",(err,result)=>{
+   if(err) throw err;
+   //console.log(result);
+});
+This can become messy with many queries.
+
+const mysql = require('mysql2/promise');
+
+const [rows] = await db.query("SELECT * FROM users");
+
+Callback style:
+db.query(sql,(err,result)=>{
+   if(err){
+      //console.log(err);
+   }
+});
+Promise style:
+try{
+   const [rows] = await db.query(sql);
+}catch(err){
+   //console.log(err);
+}
+
+while we use mysql2/promise the db return like 
+[
+   {
+      insertId: 5,
+      affectedRows: 1
+   },
+   fields
+]
+[row,fields] like structure.
