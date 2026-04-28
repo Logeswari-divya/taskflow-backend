@@ -1,12 +1,12 @@
 const executeQuery = require('../utils/queryHelper');
 
-const createTask = async (title,task,projectId,assigned_to,created_by)=>{
-    const query = 'Insert into tasks (title,description,project_id,assigned_to,created_by) values(?,?,?,?,?)';
-    return await executeQuery(query,[title,task,projectId,assigned_to,created_by]);
+const createTask = async (title,task,projectId,assigned_to,created_by,due_date)=>{    
+    const query = 'Insert into tasks (title,description,project_id,assigned_to,created_by,due_date) values(?,?,?,?,?,?)';
+    return await executeQuery(query,[title,task,projectId,assigned_to,created_by,due_date]);
 }
 
 const getTaskByUser = async(userId,page,limit,status,assigned_to) =>{
-     let params=[];
+    let params=[];
     let offset = (page-1)*limit;
     let query = 'select * from tasks where assigned_to=? ';
     params.push(userId);
@@ -65,10 +65,9 @@ const updateTaskStatus=async(taskId,status)=>{
     return await executeQuery(query,[status,taskId]);
 }
 
-const updateTask=async(taskId,title,description,status)=>{
-    const query = 'update tasks set title=?,description=?,status=? where id=?';
-    return await executeQuery(query,[title,description,status,taskId]);
-
+const updateTask=async(taskId,title,description,status,assigned_to)=>{
+    const query = 'update tasks set title=?,description=?,status=?,assigned_to=? where id=?';
+    return await executeQuery(query,[title,description,status,assigned_to,taskId]);
 }
 const findTaskDB = async(taskId,projectId)=>{
     const query =  'select * from tasks where id=? and project_id=? limit 1';

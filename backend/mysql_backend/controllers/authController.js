@@ -19,7 +19,7 @@ const login = asyncwrapper(async(req,res,next)=>{
         sameSite:'Lax',
         expires:result.expires
     })
-    successResponse(res,{accesstoken:result.accesstoken},"Logged in successfully");
+    successResponse(res,{accesstoken:result.accesstoken,role:result.role},"Logged in successfully");
 })
 
 const refreshToken = asyncwrapper(async(req,res)=>{
@@ -28,8 +28,10 @@ const refreshToken = asyncwrapper(async(req,res)=>{
     res.json(token);
 })
 
-const logout = asyncwrapper(async(req,res)=>{
+const logout = asyncwrapper(async(req,res)=>{ console.log('kkddd');
     const result =await authService.logoutService(req.user.id);
+    console.log('kk',result);
+    
     successResponse(res,result)
 });
 module.exports = {

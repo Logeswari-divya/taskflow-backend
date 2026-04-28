@@ -20,12 +20,17 @@ loginForm.addEventListener('submit', async (e) => {
         const data = await res.json();
         if(!res.ok)
         {
-           throw new Error(data.data.message);
+           throw new Error(data.message);
         }
         console.log(data.data.accesstoken);
         localStorage.setItem('accessToken',data.data.accesstoken);
+        localStorage.setItem('role',data.data.role);
         window.location.href='dashboard.html';
-    } catch (error) {
-      document.getElementById('error').innerText(error.message);
+    } catch (error) {        
+       const errElement = document.getElementById('error');
+        if(errElement)
+        {
+            errElement.innerText=error.message;
+        }
     }
 })

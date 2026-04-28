@@ -1,4 +1,4 @@
-const {createUserDB,editUserDB,getUserDataDB,deletUserDB, getAllUserDB}= require('../repositories/userRepository');
+const {createUserDB,editUserDB,getUserDataDB,deletUserDB, getAllUserDB,getUserListDB}= require('../repositories/userRepository');
 const bcrypt = require('bcryptjs');
 const createUserService = async(data)=>{
     const {email,name,password,role}=data;
@@ -40,6 +40,12 @@ const getAllUserService = async(page,limit,offset,search)=>{
         result,message:'User Data fetched Successfully.'
     }
 }
+const getUserListService=async()=>{
+    const result = await getUserListDB();
+     return {
+        result,message:'User List fetched Successfully.'
+    }
+}
 module.exports = {
-    createUserService,editUserService,getUserService,deleteUserService,getAllUserService
+    createUserService,editUserService,getUserService,deleteUserService,getAllUserService,getUserListService
 }

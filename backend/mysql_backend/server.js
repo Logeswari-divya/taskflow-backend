@@ -19,6 +19,7 @@ const userRoutes = require('./routes/userRoutes.js');
 
 const errorMiddleware = require('./middleware/errorMiddleware.js');
 const cookieParser = require('cookie-parser');
+require('./jobs/dueDateRemainder.js');
 app.use(cookieParser());
 app.get('/',(req,res)=>{
     res.status(200).json({msg:'This is your first work!....'});

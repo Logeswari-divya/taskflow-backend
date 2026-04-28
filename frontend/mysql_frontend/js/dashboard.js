@@ -3,10 +3,18 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     loadProjects();
     const logoutBtn = document.getElementById('logoutBtn');
     logoutBtn.addEventListener('click', logout);
+    if (localStorage.getItem('role') == 'employee') {
+        const deleteProjectIcon = document.querySelectorAll('.userManagementMenu');
+        deleteProjectIcon.forEach((ele) => {
+            ele.style.display = 'none';
+        })
+    }
 });
 
 async function logout() {
     const res = await apiRequest('/auth/logout', 'DELETE');
+    console.log(res);
+    
     if (res.success) {
         localStorage.clear();
         toastMessage(res.data.message);
@@ -43,6 +51,9 @@ async function loadProjects() {
         })
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('btn', 'btn-sm', 'btn-light', 'text-danger');
+        if (localStorage.getItem('role') == 'employee') {
+            deleteBtn.style.display = 'none';
+        }
         deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
         deleteBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -55,6 +66,32 @@ async function loadProjects() {
         ul.appendChild(li);
     });
 }
+
+const addTaskModal = document.getElementById('addTaskModal');
+addTaskModal.addEventListener('show.bs.modal', () => {
+
+    document.querySelectorAll('#addTaskModal .is-invalid').forEach((ele) => {
+        ele.classList.remove('is-invalid');
+    });
+})
+
+async function loadUserDataList(selectedId = '') {
+    const taskModal = document.getElementById('addTaskModal');
+    const userData = await apiRequest('/user/list', 'GET');
+    const userList = userData.data.result;
+    const select = document.getElementById('assignedTo');
+    select.innerHTML = `<option value=''>Select</option>`;
+    userList.forEach((user) => {
+        const option = document.createElement('option');
+        option.value = user.id;
+        option.textContent = user.name;
+        if (selectedId == user.id) {
+            option.selected = true;
+        }
+        select.appendChild(option);
+    })
+}
+
 async function deleteProject(projectId) {
     if (confirm('Are you sure to delete the project?')) {
         await apiRequest(`/projects/${projectId}`, 'DELETE');
@@ -178,10 +215,14 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         const taskTitleEle = document.getElementById('taskTitle');
         const taskDescriptionEle = document.getElementById('taskDescription');
         const taskStatusEle = document.getElementById('taskStatus');
+        const assignedToEle = document.getElementById('assignedTo');
+        const taskDueDateEle = document.getElementById('taskDueDate');
+        const taskDueDate = taskDueDateEle.value;
+        const assignedTo = assignedToEle.value;
         const taskTitle = taskTitleEle.value;
         const taskDescription = taskDescriptionEle.value;
         const taskStatus = taskStatusEle.value;
-        [taskTitleEle, taskDescriptionEle, taskStatusEle].forEach((el) => {
+        [taskTitleEle, taskDescriptionEle, taskStatusEle, assignedToEle, taskDueDateEle].forEach((el) => {
             el.classList.remove('is-invalid');
         });
 
@@ -200,11 +241,19 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             taskStatusEle.classList.add('is-invalid');
             isValid = false;
         }
+        if (!assignedTo) {
+            assignedToEle.classList.add('is-invalid');
+            isValid = false;
+        }
+        if (!taskDueDate.trim()) {
+            taskDueDateEle.classList.add('is-invalid');
+            isValid = false;
+        }
         if (!isValid) return;
         if (id) {
-            res = await apiRequest(`/projects/${currentProjectId}/tasks/${id}`, 'PUT', { title: taskTitle, description: taskDescription, status: taskStatus });
+            res = await apiRequest(`/projects/${currentProjectId}/tasks/${id}`, 'PUT', { title: taskTitle, description: taskDescription, status: taskStatus, assigned_to: assignedTo,due_date:taskDueDate });
         } else {
-            res = await apiRequest(`/projects/${currentProjectId}/tasks`, 'POST', { title: taskTitle, description: taskDescription }); console.log(res);
+            res = await apiRequest(`/projects/${currentProjectId}/tasks`, 'POST', { title: taskTitle, description: taskDescription, assigned_to: assignedTo,due_date:taskDueDate });
         }
         const result = res.data.message;
         const modalEl = document.getElementById('addTaskModal');
@@ -218,6 +267,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     taskListData.addEventListener('click', async (e) => {
         e.preventDefault();
         const editBtn = e.target.closest('.edit-btn');
+        const deletebtn = e.target.closest('.delete-btn');
         if (editBtn) {
             const modalEl = document.getElementById('addTaskModal');
             const modal = new bootstrap.Modal(modalEl);
@@ -228,9 +278,9 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('taskTitle').value = taskdata.data[0].title;
             document.getElementById('taskDescription').value = taskdata.data[0].description;
             document.getElementById('taskStatus').value = taskdata.data[0].status;
+            loadUserDataList(taskdata.data[0].assigned_to)
             modal.show();
         }
-        const deletebtn = e.target.closest('.delete-btn');
         if (deletebtn) {
             const taskId = e.target.getAttribute('data-id');
             const res = await apiRequest(`/tasks/${taskId}`, 'DELETE');
@@ -264,7 +314,6 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             if (!confirm('Are you sure delete this comment')) return;
             await apiRequest(`/tasks/${taskId}/comment/${commentId}`, 'DELETE');
             await loadComments(taskId);
-
         }
 
         if (e.target.classList.contains('edit-comment-btn')) {
@@ -304,6 +353,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         document.querySelector('.modal-title').innerText = 'Add Task';
         addTask.reset();
         document.getElementById('taskId').value = "";
+        loadUserDataList();
     })
 
 })

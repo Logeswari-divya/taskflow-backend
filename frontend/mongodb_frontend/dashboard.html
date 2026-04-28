@@ -70,6 +70,13 @@
                                         name="taskDescription" />
                                     <div class="invalid-feedback">Description is required</div>
                                 </div>
+                                 <div class="mb-3 px-3">
+                                    <lable for="assignedTo">Assigned To</lable>
+                                    <select class="form-select" id="assignedTo" name="assignedTo">
+                                        <option value="">Select</option>
+                                    </select>
+                                    <div class="invalid-feedback">Assigned To is required</div>
+                                </div>
                                 <div class="mb-3 px-3">
                                     <label for="taskStatus">Status</label>
                                     <select id="taskStatus" class="form-select" name="taskStatus">
@@ -80,6 +87,11 @@
                                     </select>
                                     <div class="invalid-feedback">Status is required</div>
                                 </div>
+                                <div class="mb-3 px-3">
+                                    <lable for="taskDueDate">Due Date</lable>
+                                    <input type="date" class="form-control" id="taskDueDate" name="taskDueDate">
+                                </div>
+                                <div class="invalid-feedback">Due Date is required</div>
                             </form>
                         </div>
                         <div class="modal-footer">

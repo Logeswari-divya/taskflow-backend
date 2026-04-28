@@ -33,7 +33,7 @@ const login = async (data) => {
     const id=user.id;
     await saveRefreshToken(id,refreshtoken,date);
     return {
-        accesstoken,refreshtoken,expires:date
+        accesstoken,refreshtoken,expires:date,role:user.role
     }
 }
 const refreshToken = async(token)=>{
@@ -67,7 +67,7 @@ const refreshToken = async(token)=>{
     return {accessToken}
 }
 const logoutService = async (userId) => {
-    const [result] =  await logoutDB(userId);
+    const result =  await logoutDB(userId);
     return {
         result,message:'Logged out Successfully'
     }

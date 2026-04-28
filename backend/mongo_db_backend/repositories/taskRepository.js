@@ -1,8 +1,9 @@
 
 const Task = require('../model/Task');
 
-const createTask = async (title, task, projectId, assigned_to, created_by) => {
-    return await Task.create({ title, description: task, project_id: projectId, assigned_to, created_by });
+const createTask = async (title, task, projectId, assigned_to, created_by,due_date) => {console.log('fffffffffffff');
+
+    return await Task.create({ title, description: task, project_id: projectId, assigned_to, created_by,due_date});
 }
 
 const getTaskByUser = async (userId, page, limit, status, assigned_to) => {

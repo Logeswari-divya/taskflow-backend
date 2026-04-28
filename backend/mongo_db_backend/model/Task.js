@@ -34,6 +34,10 @@ const taskSchema = new mongoose.Schema({
     created_at: {
         type: Date,
         defalut: Date.now()
+    },
+    due_date:{
+        type:Date,
+        default:Date.now()
     }
 }, { timestamps: false });
 module.exports = mongoose.model('Task',taskSchema);

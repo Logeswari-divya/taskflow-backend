@@ -1,15 +1,22 @@
 const {createTask,getAllTasks,deleteTask,getTaskByUser,findTask,findTaskDB,getTaskByProjects,updateTaskStatus,updateTask}=require('../repositories/taskRepository.js');
 const ApiError = require('../utils/ApiError.js');
+const sendEmail = require('../utils/sendEmail.js');
+const {getUserDataDB}=require('../repositories/userRepository.js');
 
 
 const createTasks = async (data,projectId,user)=>{
 
-    let {title,description,assigned_to} = data;
+    let {title,description,assigned_to,due_date} = data;
     if(!assigned_to)
     {
         assigned_to=user.id;
     }
-    const taskId  = await createTask(title,description,projectId,assigned_to,user.id);
+    const taskId  = await createTask(title,description,projectId,assigned_to,user.id,due_date);
+    const userData  = await getUserDataDB(assigned_to);
+    if(userData?.email)
+    {
+       await sendEmail(`New task Created`,description,userData.email)
+    }
     return {
         message:'Task created',
         taskId

@@ -21,11 +21,12 @@ async function apiRequest(url, method = "GET", body = null, isRetry = false) {
         }
         if (!newAccessToken) {
             localStorage.removeItem('accessToken');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     }
     return res.json();
 }
+
 
 async function getRefreshToken() {
     try {

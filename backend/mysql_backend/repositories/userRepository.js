@@ -13,13 +13,18 @@ const createUserDB = async (name, email, password, role) => {
 }
 
 const getUserDataDB = async (id) => {
-    const query = 'select id,role from users where id=?';
+    const query = 'select id,role,email from users where id=?';
     const rows =  await executeQuery(query,[id]);
     return rows[0];
 }
 const logoutDB = async(id)=>{
+    console.log('gg'+id);
+    
     const query = 'DELETE from refresh_tokens where user_id=?';
-    return await executeQuery(query,[id]);
+    const res = await executeQuery(query,[id]);
+    console.log(res);
+    return  res;
+    
 }
 const editUserDB = async(userData,userId)=>{
     const {email,name,password,role}=userData;
@@ -62,6 +67,10 @@ const getAllUserDB = async(page,limit,offset,search)=>{
      const result={data,countResult,page,limit,totalPages};
      return result;
 }
+const getUserListDB =async()=>{
+    const [result] = await db.query('Select id,name from users where delete_status=1');    
+    return result;
+}
 module.exports = {
-    findUserByEmail, createUserDB , getUserDataDB ,logoutDB,editUserDB,deletUserDB,getAllUserDB
+    findUserByEmail, createUserDB , getUserDataDB ,logoutDB,editUserDB,deletUserDB,getAllUserDB,getUserListDB
 }

@@ -51,8 +51,6 @@ const getTasks = asyncwrapper(async (req, res) => {
     const data = {
         page, limit, tasks
     }
-    console.log(data);
-
     successResponse(res, data, "Tasks fetched successfully");
 })
 
@@ -76,8 +74,6 @@ const getTaskByProjects = asyncwrapper(async (req, res) => {
 const updateTaskStatus = asyncwrapper(async (req, res) => {
     const taskId = req.params.id;
     const { status } = req.body;
-    //console.log(req.body);
-
     const task = await taskService.updateTasksStatus(taskId, status);
     successResponse(res, task, "Task updated successfully");
 })
@@ -90,8 +86,10 @@ const findTask = asyncwrapper(async (req, res) => {
 })
 const updateTask = asyncwrapper(async (req, res) => {
     const taskId = req.params.id;
-    const { status, title, description } = req.body;
-    const task = await taskService.updateTasks(taskId, title, description, status);
+    const { status, title, description ,assigned_to} = req.body;
+    console.log(assigned_to);
+    
+    const task = await taskService.updateTasks(taskId, title, description, status,assigned_to);
     successResponse(res, task, "Task updated successfully");
 })
 module.exports = {

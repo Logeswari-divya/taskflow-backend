@@ -48,7 +48,10 @@ const getAllUserDB = async (page, limit, offset, search) => {
     const result = { data, countResult, page, limit, totalPages };
     return result;
 }
-
+const getUserListDB = async()=>{
+    const result = await User.find().select('_id name');
+    return result;
+}
 module.exports = {
-    findUserByEmail, createUserDB, getUserDataDB, logoutDB, editUserDB, deletUserDB, getAllUserDB
+    findUserByEmail, createUserDB, getUserDataDB, logoutDB, editUserDB, deletUserDB, getAllUserDB,getUserListDB
 }

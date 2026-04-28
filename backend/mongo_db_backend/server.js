@@ -11,8 +11,9 @@ const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
+require('./jobs/dueDateRemainder');
 app.use(cors({
-    origin:'http://localhost:5500',
+    origin:'http://localhost:5501',
     credentials:true,
     methods:['GET','POST','DELETE','PUT','PATCH']
 }));
