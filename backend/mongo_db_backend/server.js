@@ -12,7 +12,11 @@ const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
 require('./jobs/dueDateRemainder');
-app.use(cors());
+app.use(cors({
+    origin: 'https://taskflow-backend-54wfg61te-task-flow-s-projects.vercel.app',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+}));
 app.use('/api/auth',authRoutes)
 app.use('/api/user', userRoutes);
 app.use('/api/projects',projectRoutes);
