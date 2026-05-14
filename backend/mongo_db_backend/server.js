@@ -12,21 +12,17 @@ const projectRoutes = require('./routes/projectRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
 require('./jobs/dueDateRemainder');
-app.use(cors({
-    origin:'http://localhost:5501',
-    credentials:true,
-    methods:['GET','POST','DELETE','PUT','PATCH']
-}));
+app.use(cors());
 app.use('/api/auth',authRoutes)
 app.use('/api/user', userRoutes);
 app.use('/api/projects',projectRoutes);
 app.use('/api/tasks',taskRoutes);
 app.use(errorMiddleware);
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const startServer = async () => {
     try {
         await connectDB(process.env.MONGO_URI);
-        app.listen(process.env.PORT, () => {
+        app.listen(PORT, () => {
             console.log(`SERVER LISTENING TO THE PORT ${PORT}`);
         })
     } catch (error) {
