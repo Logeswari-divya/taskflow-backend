@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://taskflow-backend-1-fsgr.onrender.com/';
 async function apiRequest(url, method = "GET", body = null, isRetry = false) {
     const token = localStorage.getItem('accessToken');
     // if (!token) {
