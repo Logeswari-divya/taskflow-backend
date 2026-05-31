@@ -5,7 +5,10 @@ const app= express();
 const cors = require("cors");
 require('dotenv').config();
 app.use(cors({
-    origin:'http://localhost:5500',
+     origin: [
+        'http://localhost:5500',
+        'https://taskflow-backend-9kbz-7bpargtoo-task-flow-s-projects.vercel.app'
+    ],
     credentials:true,
     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
     allowedHeaders:['Content-Type','Authorization']
