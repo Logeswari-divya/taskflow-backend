@@ -18,9 +18,58 @@
             <input type="password" id="password" name="password" class="form-control">
             <div class="invalid-feedback">Please Enter Password</div>
             <button class="btn btn-primary mt-2 w-100">Login</button>
-            <p id="error" class="text-danger mt2"></p>
+             <div class="mt-2 text-end">
+                <p id="newAccountModel"><a href="javascript:void(0)"  data-bs-toggle="modal" data-bs-target="#newUserAccountModel"
+                        class="text-decoration-none ma-3">Create An Account</a></p>
+            </div>
+            <p id="error" class="text-danger mt-2"></p>
         </form>
     </div>
+    <div class="modal fade" id="newUserAccountModel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create A New User Account</h5>
+                    <button class="btn-close" data-bs-dismiss="modal">X</button>
+                </div>
+                <div class="modal-body">
+                    <form action="POST" id="createNewUser">
+                        <input type="hidden" id="userId">
+                        <div class="mb-3 px-3">
+                            <label for="userName">Name</label>
+                            <input type="text" class="form-control" id="userName" name="userName">
+                            <div class="invalid-feedback">Name is required</div>
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="userEmail">Email</label>
+                            <input type="email" class="form-control" id="userEmail" name="userEmail">
+                            <div class="invalid-feedback">Email is required</div>
+
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="userPassword">Password</label>
+                            <input type="password" class="form-control" min="6" name="userPassword" id="userPassword">
+                            <div class="invalid-feedback">Password is required</div>
+                        </div>
+                        <div class="mb-3 px-3">
+                            <label for="userRole">Role</label>
+                            <select class="form-select" id="userRole" name="userRole">
+                                <option value="">Select Role</option>
+                                <option value="manager">Manager</option>
+                                <option value="admin">Admin</option>
+                                <option value="employee">Employee</option>
+                            </select>
+                            <div class="invalid-feedback">Role is required</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" form="createNewUser">Save</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> 
     <script src="./js/auth.js"></script>
 </body>
 </html>
