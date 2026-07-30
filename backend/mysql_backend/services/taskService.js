@@ -37,15 +37,15 @@ const deleteTasks = async(taskId)=>{
     return await deleteTask(taskId);
 }
 
-const getTaskByProject = async(projectId,offset,limit)=>{
-    return  await getTaskByProjects(projectId,offset,limit);
+const getTaskByProject = async(projectId,offset,limit,user)=>{
+    return  await getTaskByProjects(projectId,offset,limit,user.id,user.role);
 }
 
 const updateTasksStatus = async(taskId,status)=>{
     return await updateTaskStatus(taskId,status);
 }
-const updateTasks = async(taskId,title,description,status,assigned_to)=>{
-    return await updateTask(taskId,title,description,status,assigned_to);
+const updateTasks = async(taskId,title,description,status,assigned_to,due_date)=>{
+    return await updateTask(taskId,title,description,status,assigned_to,due_date);
 }
 const findTaskService = async(taskId,projectId)=>{
   return await findTaskDB(taskId,projectId);
