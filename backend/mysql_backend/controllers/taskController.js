@@ -64,7 +64,7 @@ const getTaskByProjects = asyncwrapper(async (req, res) => {
     const page=parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page-1)*limit;
-    const result = await taskService.getTaskByProject(projectId,offset,limit);
+    const result = await taskService.getTaskByProject(projectId,offset,limit,req.user);
     let data = {
         result, total: result.length
     }
@@ -86,10 +86,10 @@ const findTask = asyncwrapper(async (req, res) => {
 })
 const updateTask = asyncwrapper(async (req, res) => {
     const taskId = req.params.id;
-    const { status, title, description ,assigned_to} = req.body;
+    const { status, title, description ,assigned_to,due_date} = req.body;
     console.log(assigned_to);
     
-    const task = await taskService.updateTasks(taskId, title, description, status,assigned_to);
+    const task = await taskService.updateTasks(taskId, title, description, status,assigned_to,due_date);
     successResponse(res, task, "Task updated successfully");
 })
 module.exports = {
