@@ -12,8 +12,23 @@ const register = async (data) => {
         throw new ApiError('409','User Already Exists');
     }
     const hashPassword = await bcrypt.hash(password, 10);
-    const userId = await createUserDB(name, email, hashPassword, role);
-    return { msg: 'User created Successfully', userId };
+    const userData = await createUserDB(name, email, hashPassword, role);
+    const userDetails={
+        id:userData.insertId,role
+    }
+    if (userData.affectedRows == 1) {
+        const accesstoken = generateToken(userDetails);
+        const refreshtoken = generateRefreshToken(userDetails);
+        const date = new Date();
+        date.setDate(date.getDate() + 7);
+        const id = userDetails.id;
+        await saveRefreshToken(id, refreshtoken, date);
+        console.log('gggsw'+refreshtoken,accesstoken);
+        
+        return {
+            accesstoken, refreshtoken, expires: date, role: userDetails.role
+        }
+    }
 }
 
 const login = async (data) => {
