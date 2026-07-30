@@ -176,6 +176,13 @@ function openProjectEditModal(project) {
     const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
     modal.show();
 }
+
+const projectModal = document.getElementById('addProjectModal');
+projectModal.addEventListener('hidden.bs.modal',(e)=>{
+    document.getElementById('projectName').value ='' ;
+    document.getElementById('projectDesc').value ='' ;
+    document.getElementById('projectId').value = '';
+})
 document.addEventListener('DOMContentLoaded', async (e) => {
     const addProject = document.getElementById('addProjectForm');
     addProject.addEventListener('submit', async (e) => {
@@ -189,11 +196,11 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         [projectNameEle, projectDescEle].forEach((e) => {
             e.classList.remove('is-invalid');
         })
-        if (projectName.trim()) {
+        if (!projectName.trim()) {
             projectNameEle.classList.add('is-invalid');
         }
-        if (projectDesc.trim()) {
-            projectDescEle.classList.add('is-valid');
+        if (!projectDesc.trim()) {
+            projectDescEle.classList.add('is-invalid');
         }
         let res;
         if (projectId) {
@@ -278,6 +285,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('taskTitle').value = taskdata.data[0].title;
             document.getElementById('taskDescription').value = taskdata.data[0].description;
             document.getElementById('taskStatus').value = taskdata.data[0].status;
+            document.getElementById('taskDueDate').value=taskdata.data[0].due_date.split('T')[0];
             loadUserDataList(taskdata.data[0].assigned_to)
             modal.show();
         }
