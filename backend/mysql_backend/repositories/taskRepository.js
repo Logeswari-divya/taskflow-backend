@@ -15,11 +15,11 @@ const getTaskByUser = async(userId,page,limit,status,assigned_to) =>{
         query+='and status=?';
         params.push(status);
     }
-    if(assigned_to)
-    {
-        query+=' and assigned_to=?';
-        params.push(assigned_to);
-    }
+    // if(assigned_to)
+    // {
+    //     query+=' and assigned_to=?';
+    //     params.push(assigned_to);
+    // }
     query+=' order by DESC ';
     query+='limit ? offset ?';
     params.push(limit,offset);
@@ -56,18 +56,24 @@ const findTask = async(taskId)=>{
     return await executeQuery(query,[taskId]);
 }
 
-const getTaskByProjects = async(projectId,offset,limit)=>{
-   const query = 'Select * from tasks where project_id=? ORDER BY id DESC limit ? offset ?';
-   return await executeQuery(query,[projectId,limit,offset]);
+const getTaskByProjects = async(projectId,offset,limit,userId,userRole)=>{
+    if(userRole!='employee'){
+        const query = 'Select * from tasks where project_id=? ORDER BY id DESC limit ? offset ?';
+        return await executeQuery(query,[projectId,limit,offset]);
+    }else{
+        const query = 'Select * from tasks where project_id=? and assigned_to=? ORDER BY id DESC limit ? offset ?';
+        return await executeQuery(query,[projectId,userId,limit,offset]);
+    }
+   
 }
 const updateTaskStatus=async(taskId,status)=>{
     const query ='update tasks set status=? where id=?';
     return await executeQuery(query,[status,taskId]);
 }
 
-const updateTask=async(taskId,title,description,status,assigned_to)=>{
-    const query = 'update tasks set title=?,description=?,status=?,assigned_to=? where id=?';
-    return await executeQuery(query,[title,description,status,assigned_to,taskId]);
+const updateTask=async(taskId,title,description,status,assigned_to,due_date)=>{
+    const query = 'update tasks set title=?,description=?,status=?,assigned_to=?,due_date=?  where id=?';
+    return await executeQuery(query,[title,description,status,assigned_to,due_date,taskId]);
 }
 const findTaskDB = async(taskId,projectId)=>{
     const query =  'select * from tasks where id=? and project_id=? limit 1';
