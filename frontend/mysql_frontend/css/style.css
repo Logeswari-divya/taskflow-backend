@@ -8,3 +8,6 @@ body{
     max-height: 100vh;
     overflow-y: auto;
 }
+.active-project{
+   background-color: #4bff00e8;
+}
