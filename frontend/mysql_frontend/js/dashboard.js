@@ -114,8 +114,6 @@ window.addEventListener('scroll', () => {
     }
 })
 async function loadTasks(projectId, page = 1) {
-    if (isLoading || !hasMoreData) return;
-
     isLoading = true;
     const res = await apiRequest(`/projects/${projectId}/tasks/getTask?page=${page}&limit=5`);
     const taskList = document.getElementById('taskList');
@@ -125,6 +123,7 @@ async function loadTasks(projectId, page = 1) {
         taskList.innerHTML = '';
         hasMoreData = true;
     }
+    if (isLoading || !hasMoreData) return;
     if (tasks.length == 0) {
         hasMoreData = false;
         if (page == 0) {
