@@ -122,6 +122,7 @@ async function loadTasks(projectId, page = 1) {
     if (page == 1) {
         taskList.innerHTML = '';
         hasMoreData = true;
+        isLoading=false;
     }
     if (isLoading || !hasMoreData) return;
     if (tasks.length == 0) {
@@ -266,7 +267,9 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         const modal = bootstrap.Modal.getInstance(modalEl);
         modal.hide();
         addTask.reset();
-        loadTasks(currentProjectId);
+        isloading = false;
+        hasMoreData = true;
+        await loadTasks(currentProjectId, 1);
     })
 
     const taskListData = document.getElementById('taskList');
