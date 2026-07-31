@@ -68,7 +68,7 @@ const getAllUserDB = async(page,limit,offset,search)=>{
      return result;
 }
 const getUserListDB =async()=>{
-    const [result] = await db.query('Select id,name from users where delete_status=1');    
+    const [result] = await db.query('Select id,name from users where delete_status=0');    
     return result;
 }
 module.exports = {
