@@ -14,9 +14,9 @@ const register = async (data) => {
     const hashPassword = await bcrypt.hash(password, 10);
     const userData = await createUserDB(name, email, hashPassword, role);
     const userDetails={
-        id:userData.insertId,role
+        id:userData._id,role:userData.role
     }
-    if (userData.affectedRows == 1) {
+    if (userData._id!='') {
         const accesstoken = generateToken(userDetails);
         const refreshtoken = generateRefreshToken(userDetails);
         const date = new Date();
