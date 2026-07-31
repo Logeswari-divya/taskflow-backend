@@ -38,6 +38,10 @@ async function loadProjects() {
             currentPage = 1;
             isLoading = false;
             hasMoreData = true;
+             document.querySelectorAll('.list-group-item').forEach((item) => {
+                item.classList.remove('active-project');
+            })
+            li.classList.add('active-project');
             loadTasks(project.id);
         })
         const buttonGroup = document.createElement('div');
