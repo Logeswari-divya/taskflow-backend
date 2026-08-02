@@ -261,6 +261,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
         } else {
             res = await apiRequest(`/projects/${currentProjectId}/tasks`, 'POST', { title: taskTitle, description: taskDescription, assigned_to: assignedTo,due_date:taskDueDate });
         }
+        console.log(res.data);
         const result = res.data.message;
         const modalEl = document.getElementById('addTaskModal');
         const modal = bootstrap.Modal.getInstance(modalEl);
