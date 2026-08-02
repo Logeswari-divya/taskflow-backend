@@ -3,7 +3,7 @@ const authService = require('../services/authService');
 const {successResponse,errorResponse} = require('../utils/apiResponse.js');
 const asyncwrapper = require('../utils/AsyncWrapper.js');
 const register = async (req,res,next) => {
-   const result = await authService.login(req.body);
+   const result = await authService.register(req.body);
     res.cookie('refreshtoken',result.refreshtoken,{
         httpOnly:true,
         secure:false,
