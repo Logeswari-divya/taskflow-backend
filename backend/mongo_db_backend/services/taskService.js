@@ -48,8 +48,8 @@ const getTaskByProject = async(projectId,offset,limit)=>{
 const updateTasksStatus = async(taskId,status)=>{
     return await updateTaskStatus(taskId,status);
 }
-const updateTasks = async(taskId,title,description,status)=>{
-    return await updateTask(taskId,title,description,status);
+const updateTasks = async(taskId,title,description,status,assigned_to,due_date)=>{
+    return await updateTask(taskId,title,description,status,assigned_to,due_date);
 }
 const findTaskService = async(taskId,projectId)=>{
   return await findTaskDB(taskId,projectId);
