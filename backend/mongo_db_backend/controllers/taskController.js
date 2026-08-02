@@ -90,7 +90,7 @@ const findTask = asyncwrapper(async (req, res) => {
 })
 const updateTask = asyncwrapper(async (req, res) => {
     const taskId = req.params.id;
-    const { status, title, description } = req.body;
+    const { status, title, description,assigned_to,due_date } = req.body;
     const task = await taskService.updateTasks(taskId, title, description, status,assigned_to,due_date);
     successResponse(res, task, "Task updated successfully");
 })
