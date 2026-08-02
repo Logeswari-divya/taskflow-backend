@@ -35,8 +35,8 @@ const updateTaskStatus = async (taskId, status) => {
     return await Task.findByIdAndUpdate(taskId, { $set: { status } }, { new: true })
 }
 
-const updateTask = async (taskId, title, description, status) => {
-    return await Task.findOneAndUpdate({ _id: taskId }, { $set: { title, description, status } }, { new: true });
+const updateTask = async (taskId, title, description, status, assigned_to, due_date) => {
+    return await Task.findOneAndUpdate({ _id: taskId }, { $set: { title, description, status , assigned_to, due_date } }, { new: true });
 }
 const findTaskDB = async (taskId, projectId) => {
     return await Task.findOne({ _id: taskId, project_id: projectId });
