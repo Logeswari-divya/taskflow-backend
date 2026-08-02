@@ -173,7 +173,7 @@ async function loadUserDataList(selectedId='') {
         const option = document.createElement('option');
         option.value = user._id;
         option.textContent = user.name;
-        if(selectedId==user.id)
+        if(selectedId==user._id)
         {
             option.selected=true;
         }
@@ -303,6 +303,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('taskTitle').value = taskdata.data.title;
             document.getElementById('taskDescription').value = taskdata.data.description;
             document.getElementById('taskStatus').value = taskdata.data.status;
+            document.getElementById('taskDueDate').value = taskdata.data.due_date.split('T')[0];
             loadUserDataList(taskdata.data.assigned_to);
             modal.show();
         }
