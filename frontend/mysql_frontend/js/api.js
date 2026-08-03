@@ -13,10 +13,8 @@ async function apiRequest(url, method = "GET", body = null, isRetry = false) {
         credentials: 'include',
         body: body ? JSON.stringify(body) : null
     });
-    alert(res.status);
     if (res.status === 401 && !isRetry) {
         const newAccessToken = await getRefreshToken();
-        alert('newAccessToken'+newAccessToken);
         if (newAccessToken) {
             localStorage.setItem('accessToken', newAccessToken);
             return apiRequest(url, method, body, true);
