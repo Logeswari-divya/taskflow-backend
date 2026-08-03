@@ -6,8 +6,8 @@ const register = async (req,res,next) => {
    const result = await authService.register(req.body);
     res.cookie('refreshtoken',result.refreshtoken,{
         httpOnly:true,
-        secure:false,
-        sameSite:'Lax',
+        secure:true,
+        sameSite:'None',
         expires:result.expires
     })
     successResponse(res,{accesstoken:result.accesstoken,role:result.role},"Logged in successfully");
@@ -16,8 +16,8 @@ const login = asyncwrapper(async(req,res)=>{
     const result = await authService.login(req.body);
     res.cookie('refreshtoken',result.refreshtoken,{
         httpOnly:true,
-        secure:false,
-        sameSite:'Lax',
+        secure:true,
+        sameSite:'None',
         expires:result.expires
     })
     successResponse(res,{accesstoken:result.accesstoken,role:result.role},"Logged in successfully");
