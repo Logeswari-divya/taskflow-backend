@@ -5,7 +5,7 @@ const executeQuery = async (query, params = []) => {
         const [result] = await db.query(query, params);
         return result;
     } catch (error) {
-        throw ApiError(404, error.message);
+        throw new ApiError(404, error.message);
     }
 }
 module.exports=executeQuery;
