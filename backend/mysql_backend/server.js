@@ -7,7 +7,7 @@ require('dotenv').config();
 app.use(cors({
      origin: [
         'http://localhost:5500',
-        'https://taskflow-mysql-frontend-project.vercel.app'
+        'https://taskflow-mysql-frontend.vercel.app/'
     ],
     credentials:true,
     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
