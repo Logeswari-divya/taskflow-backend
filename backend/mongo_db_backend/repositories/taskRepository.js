@@ -35,7 +35,7 @@ const findTask = async (taskId) => {
     return await Task.findOne({ _id: taskId });
 }
 
-const getTaskByProjects = async (projectId,role,projectId, offset, limit) => {
+const getTaskByProjects = async (projectId,role,userId, offset, limit) => {
     if(role!='employee')
     {
         return await Task.find({ project_id: projectId }).limit(limit).skip(offset);
