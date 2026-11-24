@@ -14,7 +14,11 @@ const createComment = asyncwrapper(async (req, res) => {
 const getCommentsByTask = asyncwrapper(async (req,res)=>{
     const taskId = req.params.taskId;
     const result = await getCommentsByTaskService(taskId);
-    successResponse(res,result);
+    const response = {
+        comments:result,
+        loginUserId:req.user.id
+    }
+    successResponse(res, response);
 })
 
 const updateComment = asyncwrapper(async(req,res)=>{    
