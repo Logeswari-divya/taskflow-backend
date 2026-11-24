@@ -1,4 +1,6 @@
 const Project = require('../model/Project');
+const Task = require('../model/Task');
+
 const createProject = async (name, description, created_by) => {
    return await Project.create({name,description,created_by})
 }
