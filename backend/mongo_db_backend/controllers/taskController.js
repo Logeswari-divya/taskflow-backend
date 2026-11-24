@@ -90,8 +90,9 @@ const findTask = asyncwrapper(async (req, res) => {
 })
 const updateTask = asyncwrapper(async (req, res) => {
     const taskId = req.params.id;
+     const projectId=req.params.projectId;
     const { status, title, description,assigned_to,due_date } = req.body;
-    const task = await taskService.updateTasks(taskId, title, description, status,assigned_to,due_date);
+    const task = await taskService.updateTasks(projectId,taskId, title, description, status,assigned_to,due_date);
     successResponse(res, task, "Task updated successfully");
 })
 module.exports = {
