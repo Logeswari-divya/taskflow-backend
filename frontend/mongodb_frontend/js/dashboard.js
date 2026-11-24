@@ -398,15 +398,26 @@ async function loadComments(taskId) {
             </div>`
     comments.forEach((comment) => {
         const isowner = String(comment.user_id._id) === String(loginUserId);
+        const createdAt = new Date(comment.createdAt).toLocaleString();
+        const updatedAt = new Date(comment.updatedAt).toLocaleString();
+        const isEdited = comment.createdAt !== comment.updatedAt;
         container.innerHTML += `<div class='border rounded p-2 mb-2' id="comment-${comment._id}">
-    <small class="text-muted">${comment.created_at || ''}</small>
-    <p class="comment-text mb-0">${comment.comment}</p>
-    <input type="text" class="form-control mb-2 d-none edit-comment-input" name="edit_input" value="${comment.comment}">
-    <div class="mt-2">
-     ${isowner ? `
-    <button class="btn btn-sm btn-outline-primary edit-comment-btn" data-id="${comment._id}">Edit</button>
-    <button class="btn btn-sm btn-outline-success save-comment-btn d-none" data-id="${comment._id}">Save</button>
-    <button class="btn btn-sm btn-outline-danger delete-comment-btn" data-id="${comment._id}">Delete</button>
-    </div>` : ''} `
-    })
+        <div class="d-flex justify-content-between">
+        <small class="text-muted">
+            Created By : ${comment.user_id.name || ''}
+        </small>
+    
+        <small class="text-muted">
+            ${isEdited ? `Edited: ${updatedAt}` : `Created: ${createdAt}`}
+        </small>
+        </div>
+        <p class="comment-text mb-0">${comment.comment}</p>
+        <input type="text" class="form-control mb-2 d-none edit-comment-input" name="edit_input" value="${comment.comment}">
+        <div class="mt-2">
+         ${isowner ? `
+        <button class="btn btn-sm btn-outline-primary edit-comment-btn" data-id="${comment._id}">Edit</button>
+        <button class="btn btn-sm btn-outline-success save-comment-btn d-none" data-id="${comment._id}">Save</button>
+        <button class="btn btn-sm btn-outline-danger delete-comment-btn" data-id="${comment._id}">Delete</button>
+        </div>` : ''} `
+        })
 }
