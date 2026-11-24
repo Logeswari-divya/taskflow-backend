@@ -76,9 +76,9 @@ Open the MongoDB frontend entry point in your browser and configure its API base
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | admin@example.com | Admin@123 |
-| Manager | manager@example.com | Manager@123 |
-| Employee | employee@example.com | Employee@123 |
+| Admin | admin@taskflow.com | Admin@123 |
+| Manager | manager@taskflow.com | Manager@123 |
+| Employee | employee@taskflow.com | Employee@123 |
 
 **Note:** These are demo credentials created for testing purposes only. Do not use personal or production credentials.
 
