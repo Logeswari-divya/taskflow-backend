@@ -1,9 +1,16 @@
 
 const Task = require('../model/Task');
+const Project = require('../model/Project');
 
 const createTask = async (title, task, projectId, assigned_to, created_by,due_date) => {
 
-    return await Task.create({ title, description: task, project_id: projectId, assigned_to, created_by,due_date});
+      const newTask =   await Task.create({ title, description: task, project_id: projectId, assigned_to, created_by,due_date});
+      await Project.findByIdAndUpdate(projectId,{
+        $addToSet:{
+            members:assigned_to
+        }
+    })
+    return newTask;
 }
 
 const getTaskByUser = async (userId, page, limit, status, assigned_to) => {
@@ -35,8 +42,15 @@ const updateTaskStatus = async (taskId, status) => {
     return await Task.findByIdAndUpdate(taskId, { $set: { status } }, { new: true })
 }
 
-const updateTask = async (taskId, title, description, status, assigned_to, due_date) => {
-    return await Task.findOneAndUpdate({ _id: taskId }, { $set: { title, description, status , assigned_to, due_date } }, { new: true });
+const updateTask = async (projectId,taskId, title, description, status, assigned_to, due_date) => {
+    
+    const updateTasks= await Task.findOneAndUpdate({ _id: taskId }, { $set: { title, description, status , assigned_to, due_date } }, { new: true });
+    await Project.findByIdAndUpdate(projectId,{
+        $addToSet:{
+            members:assigned_to
+        }
+    })
+    return updateTasks;
 }
 const findTaskDB = async (taskId, projectId) => {
     return await Task.findOne({ _id: taskId, project_id: projectId });
