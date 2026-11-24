@@ -41,8 +41,8 @@ const deleteTasks = async(taskId)=>{
     return await deleteTask(taskId);
 }
 
-const getTaskByProject = async(projectId,role,projectId,offset,limit)=>{
-    return  await getTaskByProjects(projectId,role,projectId,offset,limit);
+const getTaskByProject = async(projectId,role,userId,offset,limit)=>{
+    return  await getTaskByProjects(projectId,role,userId,offset,limit);
 }
 
 const updateTasksStatus = async(taskId,status)=>{
