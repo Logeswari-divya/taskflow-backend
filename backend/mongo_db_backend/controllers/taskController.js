@@ -66,7 +66,9 @@ const getTaskByProjects = asyncwrapper(async (req, res) => {
     const page=parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page-1)*limit;
-    const result = await taskService.getTaskByProject(projectId,offset,limit);
+    const role = req.user.role;
+    const userId= req.user.id;
+    const result = await taskService.getTaskByProject(projectId,role,userId,offset,limit);
     let data = {
         result, total: result.length
     }
