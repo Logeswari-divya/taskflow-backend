@@ -8,6 +8,12 @@ const projectSchema = new mongoose.Schema({
         type:String,
         default:null
     },
+    members:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
     created_by:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
