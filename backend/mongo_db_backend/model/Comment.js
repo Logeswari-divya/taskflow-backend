@@ -21,5 +21,5 @@ const commentSchema = new mongoose.Schema({
         type: Date,
         defaulf: Date.now()
     }
-}, { timestamps: false });
+}, { timestamps: true });
 module.exports = mongoose.model('Comment',commentSchema);
