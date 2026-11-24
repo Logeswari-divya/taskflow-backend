@@ -390,20 +390,23 @@ async function loadComments(taskId) {
     const container = document.getElementById(`comments-${taskId}`);
     container.innerHTML = '';
     const res = await apiRequest(`/tasks/${taskId}/comment`, 'GET');
-    const comments = res.data;
+    const comments = res.data.comments; 
+    const loginUserId = res.data.loginUserId;
     container.innerHTML += `<div class='border rouded p-2 mb-2'>
                 <input type="text" class="form-control my-3" id="new-comment-${taskId}" placeholder = "write comment here..">
                 <button class="btn btn-sm btn-success add-comment-btn" data-id="${taskId}" >Add Comment</button>
             </div>`
     comments.forEach((comment) => {
+        const isowner = String(comment.user_id._id) === String(loginUserId);
         container.innerHTML += `<div class='border rounded p-2 mb-2' id="comment-${comment._id}">
     <small class="text-muted">${comment.created_at || ''}</small>
     <p class="comment-text mb-0">${comment.comment}</p>
     <input type="text" class="form-control mb-2 d-none edit-comment-input" name="edit_input" value="${comment.comment}">
     <div class="mt-2">
+     ${isowner ? `
     <button class="btn btn-sm btn-outline-primary edit-comment-btn" data-id="${comment._id}">Edit</button>
     <button class="btn btn-sm btn-outline-success save-comment-btn d-none" data-id="${comment._id}">Save</button>
     <button class="btn btn-sm btn-outline-danger delete-comment-btn" data-id="${comment._id}">Delete</button>
-    </div>`;
+    </div>` : ''} `
     })
 }
