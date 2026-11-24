@@ -4,7 +4,29 @@ const createProject = async (name, description, created_by) => {
 }
 
 const getProjects = async (userId) => {
-    return await Project.find({created_by:userId,delete_status:0});
+   const createdById = Project.schema.path('created_by').cast(userId);
+    const assignedToId = Task.schema.path('assigned_to').cast(userId);
+
+    const result = await Project.aggregate([
+        {
+            $lookup: {
+                from: 'tasks',
+                localField: '_id',
+                foreignField: 'project_id',
+                as: 'tasks'
+            }
+        },
+        {
+            $match: {
+                delete_status: 0,
+                $or: [
+                    { created_by: createdById },
+                    { 'tasks.assigned_to': assignedToId }
+                ]
+            }
+        }
+    ]);
+    return result;
 }
 
 const updateProjectDB = async (projectName, projectDesc,projectId) => {
